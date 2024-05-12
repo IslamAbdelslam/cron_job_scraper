@@ -62,7 +62,7 @@ async function sendEmail(message) {
 
 
 // Schedule the function to run every day at 10:22 p.m 
-cron.schedule('0 22 * * *', async () => {
+cron.schedule('12 23 * * *', async () => {
     console.log('Running scraper...');
     await scrapeAndSearch();
 }, {
