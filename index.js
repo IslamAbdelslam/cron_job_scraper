@@ -1,8 +1,12 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const nodemailer = require('nodemailer');
-const cron = require('node-cron');
+// const cron = require('node-cron');
+const express = require('express');
 require('dotenv').config();
+const port = process.env.PORT;
+const app = express();
+
 
 // Function to scrape the website and search for the word "2025"
 async function scrapeAndSearch() {
@@ -57,15 +61,24 @@ async function sendEmail(message) {
     }
 }
 
-//test it without cron
-// scrapeAndSearch();
+
+//get request for cron job
+app.get('/', (req, res) => {
+    scrapeAndSearch();
+    res.send('cron job is done');
+})
+
+
+app.listen(port, () => {
+    console.log(`Server is listening on port ${PORT}`);
+});
 
 
 // Schedule the function to run every day at 10:22 p.m 
-cron.schedule('12 23 * * *', async () => {
-    console.log('Running scraper...');
-    await scrapeAndSearch();
-}, {
-    scheduled: true,
-    timezone: 'Africa/Cairo'
-});
+// cron.schedule('30 23 * * *', async () => {
+//     console.log('Running scraper...');
+//     await scrapeAndSearch();
+// }, {
+//     scheduled: true,
+//     timezone: 'Africa/Cairo'
+// });
