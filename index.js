@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 // const cron = require('node-cron');
 const express = require('express');
 require('dotenv').config();
-const port = process.env.PORT;
+const port = process.env.PORT || 10000;
 const app = express();
 
 
@@ -70,7 +70,7 @@ app.get('/', (req, res) => {
 
 
 app.listen(port, () => {
-    console.log(`Server is listening on port ${PORT}`);
+    console.log(`Server is listening on port ${port}`);
 });
 
 
