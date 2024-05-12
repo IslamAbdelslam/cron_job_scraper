@@ -1,63 +1,54 @@
-## CRON_SCRAPPER
+# FRCR 2025 Update Scraper
 
-This script performs web scraping on the Royal College of Radiologists (RCR) website to search for the occurrence of the word "2025" on a specific page. If the word is found, it sends an email notification to designated recipients. The script is scheduled to run automatically every day at 10:22 PM Cairo time.
+This Node.js application periodically scrapes a website to check for updates related to the "FRCR 2025" topic. If the specified keyword is found on the website, it sends an email notification to notify the recipients about the update.
 
-### Requirements
+## Dependencies
 
-Ensure you have the following prerequisites installed:
+- [axios](https://www.npmjs.com/package/axios): For making HTTP requests to fetch website content.
+- [cheerio](https://www.npmjs.com/package/cheerio): For parsing HTML content and extracting information.
+- [nodemailer](https://www.npmjs.com/package/nodemailer): For sending email notifications.
+- [express](https://www.npmjs.com/package/express): For creating a simple HTTP server.
+- [dotenv](https://www.npmjs.com/package/dotenv): For loading environment variables from a .env file.
 
-- Node.js
-- npm (Node Package Manager)
+## Installation
 
-### Installation
+1. Clone the repository:
+    ```
+    git clone <repository-url>
+    ```
 
-1. Clone this repository to your local machine.
-2. Navigate to the project directory.
-3. Run `npm install` to install dependencies.
+2. Install dependencies:
+    ```
+    npm install
+    ```
 
-### Usage
+3. Create a `.env` file in the project directory and add the following environment variables:
+    ```
+    PORT=10000
+    EMAIL_CRON=your-email@gmail.com
+    PASS_CRON=your-email-password
+    EMAIL_USER=user1@example.com
+    EMAIL_USER_2=user2@example.com
+    ```
 
-1. Set up your environment variables by creating a `.env` file in the project directory. Include the following variables:
+## Usage
 
-   ```
-   EMAIL_CRON=your_email@gmail.com
-   PASS_CRON=your_app_password
-   EMAIL_USER=recipient1@example.com
-   EMAIL_USER_2=recipient2@example.com
-   ```
+Run the application using the following command:
+```
+npm start
+```
 
-   - `EMAIL_CRON`: Your Gmail email address used for sending emails.
-   - `PASS_CRON`: The App Password generated for your Gmail account.
-   - `EMAIL_USER`: The email address of the primary recipient.
-   - `EMAIL_USER_2`: The email address of the secondary recipient.
+The application will start an HTTP server listening on the specified port (default is 10000). When a GET request is made to the root route `/`, it triggers a cron job to scrape the website specified in the code. If the keyword "2025" is found on the website, it sends email notifications to the recipients specified in the `.env` file.
 
-2. Update the URL in the script (`axios.get`) to the desired webpage to be scraped.
+## Customization
 
-3. Run the script using the command:
+- You can modify the URL to be scraped in the `scrapeAndSearch` function by updating the `axios.get()` method's URL parameter.
+- Adjust the keyword to search for by modifying the `text.includes('2025')` condition in the `scrapeAndSearch` function.
+- Customize the email message and subject in the `sendEmail` function.
+- You can add more recipients by adding additional `EMAIL_USER_X` variables in the `.env` file and updating the `mailOptions_me` object accordingly.
 
-   ```
-   node your_script_name.js
-   ```
+Ensure that the necessary permissions and configurations are set up for your email service provider to send emails from the application.
 
-   This will start the cron job, which will execute the web scraping function at the scheduled time.
+## Credits
 
-### Explanation
-
-- **`scrapeAndSearch()`**: This function performs web scraping using Axios and Cheerio to search for the occurrence of the word "2025" on a specific webpage. It then sends an email notification based on the search result.
-
-- **`sendEmail(message)`**: This function sends email notifications using Nodemailer. It sends emails to the recipients specified in the environment variables.
-
-- **`cron.schedule()`**: This schedules the `scrapeAndSearch()` function to run automatically every day at 10:22 PM Cairo time using the `node-cron` module.
-
-### Notes
-
-- Ensure that you have enabled Two-Step Verification for your Gmail account and generated an App Password specifically for this script.
-- Update the recipients' email addresses (`EMAIL_USER` and `EMAIL_USER_2`) as per your requirements.
-- Modify the script to scrape different webpages or search for different keywords as needed.
-
-### Credits
-
-- **axios**: Promise-based HTTP client for Node.js.
-- **cheerio**: Fast, flexible, and lean implementation of core jQuery designed specifically for the server.
-- **nodemailer**: Module for sending emails with Node.js.
-- **node-cron**: Module for scheduling cron jobs in Node.js.
+This application was created by Islam Abdelslam.

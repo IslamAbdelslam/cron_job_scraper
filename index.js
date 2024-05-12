@@ -1,7 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const nodemailer = require('nodemailer');
-// const cron = require('node-cron');
 const express = require('express');
 require('dotenv').config();
 const port = process.env.PORT || 10000;
@@ -72,13 +71,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });
-
-
-// Schedule the function to run every day at 10:22 p.m 
-// cron.schedule('30 23 * * *', async () => {
-//     console.log('Running scraper...');
-//     await scrapeAndSearch();
-// }, {
-//     scheduled: true,
-//     timezone: 'Africa/Cairo'
-// });
