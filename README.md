@@ -40,6 +40,18 @@ npm start
 
 The application will start an HTTP server listening on the specified port (default is 10000). When a GET request is made to the root route `/`, it triggers a cron job to scrape the website specified in the code. If the keyword "2025" is found on the website, it sends email notifications to the recipients specified in the `.env` file.
 
+### Integration with cron-job.org
+
+You can set up a recurring GET request to your application endpoint using cron-job.org. Configure a job on cron-job.org to periodically send a GET request to your server's endpoint `/`. This will trigger the scraping and email sending process at the specified intervals.
+
+1. Log in to [cron-job.org](https://cron-job.org/en/).
+2. Create a new job.
+3. Set the job type to "HTTP(s) Request".
+4. Enter your server's URL followed by the endpoint `/` in the URL field (e.g., `https://your-domain.com/`).
+5. Set the request method to "GET".
+6. Define the schedule for the job to specify how often the request should be sent.
+7. Save the job.
+
 ## Customization
 
 - You can modify the URL to be scraped in the `scrapeAndSearch` function by updating the `axios.get()` method's URL parameter.
@@ -51,4 +63,4 @@ Ensure that the necessary permissions and configurations are set up for your ema
 
 ## Credits
 
-This application was created by Islam Abdelslam.
+This application was created by [Islam Abdelslam].
