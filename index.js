@@ -2,6 +2,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const nodemailer = require('nodemailer');
 
+require('dotenv').config();
+
 // Function to scrape the website and search for the word "2025"
 async function scrapeAndSearch() {
     try {
