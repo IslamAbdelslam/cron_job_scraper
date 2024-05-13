@@ -64,7 +64,7 @@ async function sendEmail(message) {
 //get request for cron job
 app.get('/', (req, res) => {
     scrapeAndSearch();
-    res.send('cron job is done');
+    res.send({"message":"cron job is done"});
 })
 
 
